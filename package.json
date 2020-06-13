@@ -10,6 +10,7 @@
   "dependencies": {
     "@now/node-server": "^0.8.2",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "now": "^19.1.0"
   }
