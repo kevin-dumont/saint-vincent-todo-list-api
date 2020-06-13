@@ -50,7 +50,7 @@ app.post("/todos", (req, res) => {
     creationDate: Date.now(),
   };
 
-  todos = { ...todos, newTask };
+  todos = [...todos, newTask];
 
   res.status(200).json(todos);
 });
