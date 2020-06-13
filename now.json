@@ -13,12 +13,12 @@
       "methods": ["POST"]
     },
     {
-      "src": "/todos",
+      "src": "/todos/:id",
       "dest": "/index.js",
       "methods": ["PUT"]
     },
     {
-      "src": "/todos",
+      "src": "/todos/:id",
       "dest": "/index.js",
       "methods": ["DELETE"]
     }
