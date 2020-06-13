@@ -7,7 +7,7 @@ const port = 5000;
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("Welcome to a todo list API");
+  return res.send("Welcome to a todo list API");
 });
 
 let id = 1;
@@ -30,7 +30,7 @@ let todos = [
  * List
  */
 app.get("/todos", (req, res) => {
-  res.status(200).json(todos);
+  return res.status(200).json(todos);
 });
 
 /**
@@ -40,7 +40,7 @@ app.post("/todos", (req, res) => {
   const { title = "" } = req.body;
 
   if (!title || "" === title.trim()) {
-    res.status(400).json({ error: "The 'title' field is required" });
+    return res.status(400).json({ error: "The 'title' field is required" });
   }
 
   const newTask = {
@@ -52,53 +52,56 @@ app.post("/todos", (req, res) => {
 
   todos = [...todos, newTask];
 
-  res.status(200).json(todos);
+  return res.status(200).json(todos);
 });
 
 /**
  * Update
  */
-app.put("/todos", (req, res) => {
-  const { id, title = "", done } = req.body;
+app.put("/todos/:id", (req, res) => {
+  const { id } = req.params;
+  const { title = "", done } = req.body;
 
   const todoIndex = todos.findIndex((t) => t.id === id);
 
   if (todoIndex === -1) {
-    res
+    return res
       .status(404)
       .json({ error: `The todo with the id ${id} does not exist` });
   }
 
   if (!title || "" === title.trim()) {
-    res.status(400).json({ error: "The 'title' field is required" });
+    return res.status(400).json({ error: "The 'title' field is required" });
   }
 
   if (typeof done !== "boolean") {
-    res.status(400).json({ error: "The 'done' field must be a boolean" });
+    return res
+      .status(400)
+      .json({ error: "The 'done' field must be a boolean" });
   }
 
   todos[todoIndex] = { ...todos[todoIndex], id, title, done };
 
-  res.status(200).json(todos);
+  return res.status(200).json(todos);
 });
 
 /**
  * Remove
  */
-app.delete("/todos", (req, res) => {
-  const { id } = req.body;
+app.delete("/todos/:id", (req, res) => {
+  const { id } = req.params;
 
-  const todoIndex = todos.findIndex((t) => t.id === id);
+  const todoIndex = todos.findIndex((t) => t.id == id);
 
   if (todoIndex === -1) {
-    res
+    return res
       .status(404)
       .json({ error: `The todo with the id ${id} does not exist` });
   }
 
-  todos = todos.filter((t) => t.id !== id);
+  todos = todos.filter((t) => t.id != id);
 
-  res.status(200).json(todos);
+  return res.status(200).json(todos);
 });
 
 app.listen(port, () => {
