@@ -7,7 +7,9 @@ const port = 5000;
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  return res.send("Welcome to a todo list API");
+  return res.json({
+    message: `Welcome to a todo list API. Check the documentation : https://documenter.getpostman.com/view/11722081/SzzhddjY?version=latest`,
+  });
 });
 
 let id = 1;
