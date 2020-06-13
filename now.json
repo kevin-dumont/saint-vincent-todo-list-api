@@ -1,26 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "index.js", "use": "@now/node-server" }],
-  "routes": [
-    {
-      "src": "/todos",
-      "dest": "/index.js",
-      "methods": ["GET"]
-    },
-    {
-      "src": "/todos",
-      "dest": "/index.js",
-      "methods": ["POST"]
-    },
-    {
-      "src": "/todos/:id",
-      "dest": "/index.js",
-      "methods": ["PUT"]
-    },
-    {
-      "src": "/todos/:id",
-      "dest": "/index.js",
-      "methods": ["DELETE"]
-    }
-  ]
+  "routes": [{ "src": "/(.*)", "dest": "/index.js" }]
 }
