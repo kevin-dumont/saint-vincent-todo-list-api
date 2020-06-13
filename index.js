@@ -62,7 +62,7 @@ app.put("/todos/:id", (req, res) => {
   const { id } = req.params;
   const { title = "", done } = req.body;
 
-  const todoIndex = todos.findIndex((t) => t.id === id);
+  const todoIndex = todos.findIndex((t) => t.id == id);
 
   if (todoIndex === -1) {
     return res
